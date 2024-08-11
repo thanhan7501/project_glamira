@@ -25,17 +25,13 @@ blob = bucket.blob("user_behavior/user_behavior.jsonl")
 
 print("Start data stream to GCS")
 
-jsonl_buffer = io.StringIO()
-
-# with blob.open("wb") as blob_writer:
-all_data = collection.find({}, projection={"_id": False}, batch_size=100000)
-count = 0
-for data in all_data:
-  count += 1
-  jsonl_buffer.write(json.dumps(data) + "\n")
-  print(f"chunk number: {count}")
-
-blob.upload_from_file(jsonl_buffer, 'application/jsonl')
+with blob.open("w") as blob_writer:
+  all_data = collection.find({}, projection={"_id": False}, batch_size=100000)
+  count = 0
+  for data in all_data:
+    count += 1
+    blob_writer.write(json.dumps(data) + "\n")
+    print(f"chunk number: {count}")
 
 print("Data streamed to GCS")
 
