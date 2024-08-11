@@ -32,7 +32,7 @@ all_data = collection.find({}, projection={"_id": False}, batch_size=100000)
 count = 0
 for data in all_data:
   count += 1
-  jsonl_buffer.write((json.dumps(data) + "\n").encode("utf-8"))
+  jsonl_buffer.write(json.dumps(data) + "\n")
   print(f"chunk number: {count}")
 
 blob.upload_from_file(jsonl_buffer, 'application/jsonl')
