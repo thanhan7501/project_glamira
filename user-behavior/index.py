@@ -31,6 +31,8 @@ with open("glamira.jsonl", "w", encoding="utf-8") as blob_writer:
   for data in all_data:
     count += 1
     blob_writer.write(json.dumps(data) + "\n")
+    if count % 100000 == 0:
+      print(f"chunk number: {count}")
 
 print("Data streamed to GCS")
 
