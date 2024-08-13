@@ -25,7 +25,7 @@ blob = bucket.blob("user_behavior/user_behavior.jsonl")
 
 print("Start data stream to GCS")
 
-with blob.open("w") as blob_writer:
+with open("glamira.jsonl", "w", encoding="utf-8") as blob_writer:
   all_data = collection.find({}, projection={"_id": False}, batch_size=100000)
   count = 0
   for data in all_data:
