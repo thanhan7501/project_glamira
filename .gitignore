@@ -96,3 +96,10 @@ ENV/
 .DS_Store
 
 .idea/
+
+# DBT
+target/
+dbt_packages/
+logs/
+.user.yml
+profiles.yml
